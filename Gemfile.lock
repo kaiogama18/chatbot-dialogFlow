@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    brcep (3.3.0)
+    cpf_cnpj (0.4.1)
     daemons (1.2.6)
     eventmachine (1.2.5)
     json (2.1.0)
@@ -24,6 +26,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  brcep
+  cpf_cnpj
   json
   pp
   sinatra

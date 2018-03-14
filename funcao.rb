@@ -5,7 +5,7 @@ FB_GRAPH        = 'https://graph.facebook.com'
 FB_MESSAGES     = 'https://graph.facebook.com/v2.10/me/messages'
 FB_ACCESS_TOKEN = 'EAAbPeabl9AkBAOInGonuGJbcYaZCw1QmnboteBBvExnb51bSmsPOU8FHHCO2clZBsZBnskMzoF4GPB7rzy79Bp2LyGMuMm9sMw6H79WSsIinnGHjs9am8KPeHjqbVhRqxzJjjyrnslhAWhFIUEN6BkVGN27moxluig9emlb4gZDZD'
 
-class Facebook
+class Conexao
 
   def post(objJson)
     uri = URI.parse('https://graph.facebook.com/v2.10/me/messages'+"?access_token=EAAbPeabl9AkBAOkp0I0ZCRnNuZAu557jwzQ4csTxJ1w93eTTHOWScJ8FRP4ZAAODLBZAtmkSnPCDaK0N1t3fJ8xwPpBVFCXZAOIeb2TbLN9TH49CH2lnC1CxpIqAGS1SdRlvVdgZAcB1tyFPfCitcKmSUJyIONAdSdFE7MIItnowZDZD")
@@ -48,24 +48,26 @@ class Facebook
     return messengerID
   end
 
+  def parseGetCep(request_json)
+    messengerID = ""
+    request_json[:result][:contexts].each do |row|
+      messengerID = row[:parameters][:cep] if row[:parameters].key? :cep
+    end
+    return cep
+  end
+
   def parseGetAction(request_json)
     action = ""
      action = request_json[:result][:action]
     return action
   end
 
+  def parseGetResposta(request_json)
+    resposta = ""
+    resposta = request_json[:result][:resolvedQuery]
+      return resposta
+  end
+
 end
 
-def post(objJson)
-    uri = URI.parse('https://graph.facebook.com/v2.10/me/messages'+"?access_token=EAAbPeabl9AkBAOkp0I0ZCRnNuZAu557jwzQ4csTxJ1w93eTTHOWScJ8FRP4ZAAODLBZAtmkSnPCDaK0N1t3fJ8xwPpBVFCXZAOIeb2TbLN9TH49CH2lnC1CxpIqAGS1SdRlvVdgZAcB1tyFPfCitcKmSUJyIONAdSdFE7MIItnowZDZD")
-    request = Net::HTTP::Post.new(uri)
-    request.content_type = "application/json"
-    request.body = JSON.dump(objJson)
-    req_options = {
-        use_ssl: uri.scheme == "https",
-    }
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-        http.finish
-    end
-end
+
