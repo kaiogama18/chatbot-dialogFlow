@@ -4,6 +4,7 @@ require 'json'
 require 'pp'
 
 require_relative './funcao'
+require_relative './comandos'
 set :port, 8000
 
 post '/webhook' do 
@@ -11,13 +12,14 @@ post '/webhook' do
     request_payload =  "#{ request.body.read }"
     request_json = JSON.parse(request_payload,symbolize_names: true)
     tag = fb.parseGetAction(request_json)
-    if tag == "action-cep"
-        
-        messageText = 'Cep inválido'
+    
+    Cep.new(tag)
+    Cpf.new(tag)
+    
+    if tag == "Bot"
+        messageText = 'Final'
     end
-    if tag == "action-cpf"
-        messageText = 'Cpf inválido'
-    end 
+     
     messengerID = fb.parseGetId(request_json)
     fb.post(fb.messageText(messengerID,messageText))
 end
