@@ -48,10 +48,10 @@ class Conexao
     return messengerID
   end
 
-  def parseGetCep(request_json)
-    messengerID = ""
+  def parseGetTagCep(request_json)
+    cep = ""
     request_json[:result][:contexts].each do |row|
-      messengerID = row[:parameters][:cep] if row[:parameters].key? :cep
+      cep = row[:parameters][:CEP] if row[:parameters].key? :CEP
     end
     return cep
   end
@@ -61,13 +61,13 @@ class Conexao
      action = request_json[:result][:action]
     return action
   end
-
+=begin
   def parseGetResposta(request_json)
     resposta = ""
     resposta = request_json[:result][:resolvedQuery]
       return resposta
   end
-
+=end
 end
 
 
