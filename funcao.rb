@@ -61,7 +61,7 @@ class Conexao
     request_json[:result][:contexts].each do |row|
       cpf = row[:parameters][:CPF] if row[:parameters].key? :CPF
     end
-    return cep
+    return cpf
   end
 
   def parseGetTagCnpj(request_json)
@@ -69,7 +69,7 @@ class Conexao
     request_json[:result][:contexts].each do |row|
       cnpj = row[:parameters][:CNPJ] if row[:parameters].key? :CNPJ
     end
-    return cep
+    return cnpj
   end
 
   def parseGetAction(request_json)
