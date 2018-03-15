@@ -59,7 +59,7 @@ class Conexao
   def parseGetTagCpf(request_json)
     cpf = ""
     request_json[:result][:contexts].each do |row|
-      cpf = row[:parameters][:CEP] if row[:parameters].key? :CEP
+      cpf = row[:parameters][:CPF] if row[:parameters].key? :CPF
     end
     return cep
   end
