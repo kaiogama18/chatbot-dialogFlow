@@ -72,11 +72,37 @@ class Comandos
             return resultado.to_s
         end
     end
+    # ----------------------------------------------------------------------
+    #
+    # Função para validar o Rua
+    #
+    # -----------------------------------------------------------------------
+    def Rua(tag_resposta)
+        aux = tag_resposta
+        aux = aux.gsub(/rua /, "Rua+")
+        aux = aux.gsub(/Rua /, "rua+")
+        aux = aux.gsub(/ /, "+")
+        aux = aux.gsub(/ã/, "%C3%A3")
+        aux = aux.gsub(/ã/, "%C3%A3")
+        return final = "https://www.google.com.br/search?ei=u72qWpCmI4uDwgT4nLrACg&q="+aux+"+manaus&oq="+aux+"+manaus&gs_l=psy-ab.3...0.0.0.125973.0.0.0.0.0.0.0.0..0.0....0...1c..64.psy-ab..0.0.0....0.qOUW-MpAZxk"
+    end
+
+    def ObjJsonNow(messengerID, texto)
+        objJson = {
+            :recipient => {:id  => messengerID},
+            :message   => {
+                :attachment =>{
+                    :type => "archive", 
+                    :payload =>{
+                      :url => texto, 
+                      :is_reusable => true
+                    }
+                }
+            }
+        }
+        return objJson
+    end
 end
-
-
-
-
 
 
 

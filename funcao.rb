@@ -72,18 +72,27 @@ class Conexao
     return cnpj
   end
 
+  def parseGetTagRua(request_json)
+    rua = ""
+    request_json[:result][:contexts].each do |row|
+      rua = row[:parameters][:RUA] if row[:parameters].key? :RUA
+    end
+    return rua
+  end
+
   def parseGetAction(request_json)
     action = ""
      action = request_json[:result][:action]
     return action
   end
-=begin
+
   def parseGetResposta(request_json)
     resposta = ""
     resposta = request_json[:result][:resolvedQuery]
       return resposta
   end
-=end
+
+
 end
 
 
