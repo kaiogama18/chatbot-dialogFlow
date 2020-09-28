@@ -5,9 +5,9 @@ GEM
     cpf_cnpj (0.4.1)
     daemons (1.2.6)
     eventmachine (1.2.5)
-    json (2.1.0)
+    json (2.3.1)
     mustermann (1.0.2)
-    pp (0.1.1)
+    pp (0.1.0)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack
